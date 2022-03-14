@@ -9,14 +9,12 @@ object SparkHiveConnection {
       .appName("Spark Hive Connection")
       .master("local[*]")
       .config("hive.metastore.uris", "thrift://localhost:9083")
-      //    .config("javax.jdo.option.ConnectionUserName", "hive")
-      //    .config("javax.jdo.option.ConnectionPassword", "H1AQJFaRQ67J8nf9")
-      .enableHiveSupport() // don't forget to enable hive support
+      .enableHiveSupport()
       .getOrCreate()
 
     import spark.implicits._
 
-    val empDF = spark.table("employee")
+    val empDF = spark.sql("select * from default.student_txn where gender='Male'")
     empDF.show()
   }
 }
